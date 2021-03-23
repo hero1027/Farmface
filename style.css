@@ -1,0 +1,431 @@
+body {
+  font-family: sans-serif;
+  background-color: #ecebdf;
+}
+
+.file-upload {
+  margin: 0 auto;
+  padding: 13% 0;
+  border-radius: 10px;
+  border: solid 1.5px #f6f7fa;
+  background-color: #f6f7fa;
+	
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1AA059;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  
+  position: relative;
+  object-fit: contain;
+  border-radius: 10px;
+  border: dashed 2px #35465d;
+ background-color: #ffffff;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #35465d;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  width: 50%;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #35465d;
+  font-family: NanumSquareR;
+  font-size:1.5rem;
+  line-height: 1.53;
+  text-align: center;
+  margin: 0 auto;
+	
+}
+
+.file-upload-image {
+  max-height: 350px;
+  max-width: 350px;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.nav-distance {
+	padding: 2.1% 7.8%;
+}
+.navbar-light .navbar-brand{
+	font-family: NanumSquareR;
+	line-height: 1.7;
+	text-align: left;
+	color: #35465d;
+	
+}
+.navbar-light .navbar-toggler{
+	border-color:#ffffff;
+}
+.section {
+	margin-top: 10px;
+}
+.title {
+	
+	font-family: NanumSquareR;
+	font-size: 3.5em;
+	font-weight: 900;
+	line-height:1.6;
+	text-align: center;
+	color: #ff9800;
+}
+.subtitle {
+	
+	font-family: NanumSquareR;
+	font-size: 1.5em;
+	font-weight: 800;
+	line-height:1.5;
+	text-align: center;
+	color: #32DB7B;
+}
+.notion {
+	
+	font-family: NanumSquareR;
+	font-size: 1.0em;
+	font-weight: 600;
+	line-height:1.5;
+	text-align: center;
+	color: #d50000;
+}
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 10px;
+  }
+	.navbar-brand{
+		font-size: 2rem;
+	}
+}
+.try-again-btn {
+  border-radius: 40px;
+  border: solid 1.5px #35465d;
+  background-color: #35465d;
+}
+.try-again-text{
+	width: 10%;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-family: NanumSquareR;
+  font-size:1.5rem;
+  line-height: 1.53;
+  text-align: center;
+  margin: 0 auto;
+	
+}
+.bar-container {
+  height: 2.7rem;
+}
+.potato-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(203, 175, 72, 0.2);
+}
+.potato-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(203, 175, 72, 1);
+}
+.goguma-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(220, 96, 183, 0.2);
+}
+.goguma-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(220, 96, 183, 1);
+}
+.onion-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(213, 246, 244, 0.2);
+}
+.onion-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(213, 246, 244, 1);
+}
+.brocull-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(26, 112, 56, 0.2);
+}
+.brocull-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(26, 112, 56, 1);
+}
+.carrot-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(245, 138, 15, 0.2);
+}
+.carrot-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(245, 138, 15, 1);
+}
+.cucum-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(60, 189, 46, 0.2);
+}
+.cucum-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(60, 189, 46, 1);
+}
+.tomato-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(251, 40, 40, 0.2);
+}
+.tomato-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(251, 40, 40, 1);
+}
+.papri-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(242, 242, 28, 0.2);
+}
+.papri-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(242, 242, 28, 1);
+}
+.bean-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(0, 212, 255, 0.2);
+}
+.bean-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(0, 212, 255, 1);
+}
+.leaf-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: rgba(46, 130, 255, 0.2);
+}
+.leaf-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: rgba(46, 130, 255, 1);
+}
+.percent-text {
+  font-size: 1rem;
+  color: #ffffff;
+}
+.vegetable-label {
+    width: 20%;
+    text-align: left;
+    height: 2rem;
+}
+#label-container {
+    width: 80%;
+    margin: 0 auto;
+}
+.result-message {
+    font-size: 2rem;
+}
+
+
+.vegetable-ex {
+    font-size: 1.5rem;
+}
+.potato-vegetable-messege {
+    color: #3ba363;
+}
+.goguma-vegetable-messege {
+    color: #3ba363;
+}
+
+.onion-vegetable-messege {
+    color: #3ba363;
+}
+
+.brocull-vegetable-messege {
+    color: #3ba363;
+}
+
+.carrot-vegetable-messege {
+    color: #3ba363;
+}
+
+.cucum-vegetable-messege {
+    color: #3ba363;
+}
+
+.tomato-vegetable-messege {
+    color: #3ba363;
+}
+
+.papri-vegetable-messege {
+    color: #3ba363;
+}
+
+.bean-vegetable-messege {
+    color: #3ba363;
+}
+
+.leaf-vegetable-messege {
+    color: #3ba363;
+}
+
+

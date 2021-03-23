@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+			crossorigin="anonymous"
+		/>
+
+		<title>Am I a vegetable?</title>
+		<link rel="stylesheet" href="style.css" />
+		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-603fa12ddbe021e9">
+		</script>
+
+	</head>
+
+	<body>
+		
+		<section class="section">
+			<h1 class="pt-5 mb-5  title">내가 만약 야채라면~?</h1>
+			<h2 class="mb-5 subtitle">어떤 야채일까 궁금하신 분들을 위한 인공지능 테스트!</h2>
+			<h3 class="notion">!--------사용 된 사진은 그 어디에도 저장되지 않습니다--------!</h3>
+		</section>
+
+		<script
+			class="jsbin"
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+		></script>
+		<div class="container file-upload">
+			<div class="image-upload-wrap" style="width: 80%; height: 80%; margin: 0 auto;">
+				<input
+					class="file-upload-input"
+					type="file"
+					onchange="readURL(this);"
+					accept="image/*"
+				/>
+				<div class="drag-text">
+					<h3 class="mt-5 pt-5 mb-5 pb-5 upload-text">
+						얼굴이 나온 사진을 올리거나 눌러서 업로드 하세요!!
+					</h3>
+				</div>
+			</div>
+			<div class="file-upload-content">
+				<img class="file-upload-image" id="face-image" src="#" alt="your image" />
+				<div id="loading" class="animated bounce">
+					<div class="spinner-border" role="status">
+						<span class="sr-only"></span>
+					</div>
+					<p class="text-center">띠리띠리 흙파는중..</p>
+				</div>
+				<p class="result-messege"></p>
+				<div id="label-container" class="d-flex flex-column justify-content-around"></div>
+				
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="mt-5 addthis_inline_share_toolbox"></div>
+            	<h3 class="mt-5 gongu">"결과가 재밌으셨다면 친구들과 공유해 주세요~!"</h3>
+				<div class="pt-5 image-title-wrap">
+					<button
+						type="button p-2"	class="try-again-btn"	onclick="window.location.reload();">
+						
+						
+						<span class="try-again-text">다른사진으로 재시도</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer pt-5 container d-flex justify-content-center">
+			<div>
+				<p>&copy; 당근대왕 CarrotHero. All Rights Reserved.</p>
+				<p><center>도움 주신 분 : Youtube 조코딩</p>
+			</div>
+		</footer>
+		<div id="webcam-container"></div>
+
+		<div id="disqus_thread"></div>
+		<script>
+			(function () {
+				// DON'T EDIT BELOW THIS LINE
+				var d = document,
+					s = d.createElement('script');
+				s.src = 'https://carrothero.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript
+			>Please enable JavaScript to view the
+			<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
+		>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+			crossorigin="anonymous"
+		></script>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+			integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+			integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						$('.image-upload-wrap').hide();
+						$('#loading').show();
+						$('.file-upload-image').attr('src', e.target.result);
+						$('.file-upload-content').show();
+						$('.image-title').html(input.files[0].name);
+					};
+					reader.readAsDataURL(input.files[0]);
+					init().then(function () {
+						console.log('hello');
+						predict();
+						$('#loading').hide();
+					});
+				} else {
+					removeUpload();
+				}
+			}
+
+			function removeUpload() {
+				$('.file-upload-input').replaceWith($('.file-upload-input').clone());
+				$('.file-upload-content').hide();
+				$('.image-upload-wrap').show();
+			}
+			$('.image-upload-wrap').bind('dragover', function () {
+				$('.image-upload-wrap').addClass('image-dropping');
+			});
+			$('.image-upload-wrap').bind('dragleave', function () {
+				$('.image-upload-wrap').removeClass('image-dropping');
+			});
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+
+		<script type="text/javascript">
+			const URL = 'https://teachablemachine.withgoogle.com/models/IXxQCUJnm/';
+
+			let model, webcam, labelContainer, maxPredictions;
+			async function init() {
+				const modelURL = URL + 'model.json';
+				const metadataURL = URL + 'metadata.json';
+				model = await tmImage.load(modelURL, metadataURL);
+				maxPredictions = model.getTotalClasses();
+				labelContainer = document.getElementById('label-container');
+				for (let i = 0; i < maxPredictions; i++) {
+					labelContainer.appendChild(document.createElement('div'));
+				}
+			}
+			async function predict() {
+				var image = document.getElementById('face-image');
+			
+      
+				const prediction = await model.predict(image, false);
+				
+				prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+				console.log(prediction[0].className);
+				var resultMessege, resultEx;
+				switch (prediction[0].className) {
+					case 'potato':
+						resultMessege = '감자상';
+						resultEx = '야하아아아~ 감자! 감자! 왕감자~☆ <br>당신은 가지과에 속하는 대표적 구황작물!!<br>포슬포슬 감자상입니다~';
+						break;
+					case 'goguma':
+						resultMessege = '고구미상';
+						resultEx = '호.박.고.구.마 호박고구마!! 호!!박!!고!!구!!마!!<br>당신은 메꽃과의 뿌리 채소!!<br> 숨막히는 고구미상입니다~';
+						break;
+					case 'onion':
+						resultMessege = '양파상';
+						resultEx = '까고~ 또 까도 매력이 넘치는 양파~~OoO <br>당신은 외떡잎식물 백합목 백합과의 두해살이풀!!! <br> 눈물 날 만큼 매력적인 양파상입니다~';
+						break;
+					case 'brocull':
+						resultMessege = '브로콜리상';
+						resultEx = '사랑한다는 말로도~~위로가 되지 않는~♬-브로콜리너마저♬<br>당신은 겨자과에 속하는 짙은 녹색채소!!<br>독특한 매력이 있는 브로콜리상입니다~';
+						break;
+					case 'carrot':
+						resultMessege = '당근상';
+						resultEx = '당신의 매력에 납치되었다면 !당근!을 흔들어주세요!!<br>당신은 쌍떡잎식물 산형화목 미나리과의 두해살이풀!!<br>납치 되고 싶은 당근상입니다~ ';
+						break;
+					case 'cucum':
+						resultMessege = '오이상';
+						resultEx = '오이- 오이!! 길쭉길쭉 잘 빠진 오이라네~~!!<br>당신은 박과에 속하는 1년생 덩굴식물!!<br> 시원시원한 매력의 오이상입니다~';
+						break;
+					case 'tomato':
+						resultMessege = '방울토마토상';
+						resultEx = '동글동글 예쁜 얼굴에~ 빨간 옷을입은 멋쟁이 토마토~♬ 토마토~♪<br> 당신은 쌍떡잎식물 통화식물목 가지과의 한해살이풀!!<br>방울방울 귀여운 방울토마토상입니다~';
+						break;
+					case 'papri':
+						resultMessege = '파프리카상';
+						resultEx = '알록달록 파프리카~피망 아니라구요~<br> 당신은 가짓과의 한해살이풀!!<br> 세련된 색감의 알록달록 매력이 있는 파프리카상입니다~';
+						break;
+					case 'bean':
+						resultMessege = '완두콩상';
+						resultEx = '톡톡 데구르르르~ 동글동글 완두콩~♬<br> 당신은 쌍떡잎식물 이판화군 장미목 콩과의 한두해살이풀!!<br> 동글동글 작고 귀여운 매력이 있는 완두콩상입니다~';
+						break;
+					case 'leaf':
+						resultMessege = '깻잎상';
+						resultEx = '밥도둑 고기도둑 깻잎입니다~~!!<br>당신은 들깨의 잎사귀 입니다~<br>깻잎 특유의 향처럼 독특한 매력인 깻잎상입니다~ ';
+						break;
+				
+				}
+				var messege =
+					"<div class='" +
+					prediction[0].className +
+					"-vegetable-messege'>" +
+					resultMessege +
+					'</div>';
+				var ex = "<div class='vegetable-ex'>" + resultEx + '</div>';
+				$('.result-messege').html(messege + ex);
+				var barwidth;
+				for (let i = 0; i < maxPredictions; i++) {
+					if (prediction[i].probability.toFixed(2) > 0.1) {
+						barwidth = Math.round(prediction[i].probability.toFixed(2) * 100) + '%';
+					} else if (prediction[i].probability.toFixed(2) >= 0.01) {
+						barwidth = '4%';
+					} else {
+						barwidth = '2%';
+					}
+					var labelTitle;
+					switch (prediction[i].className) {
+						case 'potato':
+							labelTitle = '감자상';
+							break;
+						case 'goguma':
+							labelTitle = '고구마상';
+							break;
+						case 'onion':
+							labelTitle = '양파상';
+							break;
+						case 'brocull':
+							labelTitle = '브로콜리상';
+							break;
+						case 'carrot':
+							labelTitle = '당근상';
+							break;
+						case 'cucum':
+							labelTitle = '오이상';
+							break;
+						case 'tomato':
+							labelTitle = '방울토마토상';
+							break;
+						case 'papri':
+							labelTitle = '파프리카상';
+							break;
+						case 'bean':
+							labelTitle = '완두콩상';
+							break;
+						case 'leaf':
+							labelTitle = '깻잎깻잎상';
+							break;
+						
+					}
+					var label =
+						"<div class='vegetable-label d-flex aligh-items-center'>" +
+						labelTitle + '</div>'
+					var bar ="<div class='bar-container position-relative container'><div class='" + prediction[i].className + "-box'></div><div class='d-flex justify-content-center align-items-center " + prediction[i].className +
+						"-bar' style='width: " + barwidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + '%</span></div></div>';
+					labelContainer.childNodes[i].innerHTML = label + bar;
+				}
+			}
+		</script>
+	</body>
+	<!-- Copyright (c) 2021 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+</html>
